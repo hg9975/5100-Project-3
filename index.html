@@ -1,0 +1,185 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <link rel="stylesheet" href="styling.css">
+
+</head>
+
+<body>
+<!-- Title & Introduction -->
+    <h1>Overview of Job Opportunities in Big Data Path</h1>
+    <h3><i>Are you planning to pursue a career path in big data?</i></h3>
+    <div id="description">
+      <p id="description">
+        <a href="https://www.sas.com/en_us/insights/big-data/what-is-big-data.html">Big Data</a> is a field that treats ways to
+        handle, analyze, and extract important information from large, complex, hard-to-manage volumes of data that
+        inundate business on a day-to-day basis. With the fast development of technologies, the
+        <a href="https://www.sas.com/en_us/insights/big-data/what-is-big-data.html">importance</a> of big data has been recognized
+        and valued recent years. By analyzing the data, businesses can
+        <ul id="importance">
+          <li>improve operational efficiency</li>
+          <li>optimize product development</li>
+          <li>explore new revenue and growth opportunities</li>
+          <li>streamline resource management</li>
+        </ul>
+      </p>
+
+      <p id="description">
+        As big data becomes a focus in the business world, more and more data-related job opportunities available. <b><i>Business Analyst</i></b>,
+        <b><i>Data Analyst</i></b>, and <b><i>Data Scientist</i></b>, as three hot positions under the big data path, have significant amount of overlaps in
+        their job responsibilities and required skills. For example, they all work with massive data to solve business problems.
+        Consequently, when it comes to determine a career path, you may hesitate among these three positions. You may wonder:
+        <ul id="questions">
+          <li>What are differences among these three positions?</li>
+          <li>Which one provides more job opportunities?</li>
+          <li>What industries can I work in?</li>
+          <li>Which position is more suitable for me?</li>
+        </ul>
+      </p>
+
+      <p id="description">
+        Therefore, we collected <b>7364</b> jobs in these three positions in the U.S., which include <b>2974</b>
+        <a href="https://www.kaggle.com/andrewmvd/business-analyst-jobs">Business Analyst</a> jobs,
+        <b>1564</b> <a href="https://www.kaggle.com/andrewmvd/data-analyst-jobs">Data Analyst</a> jobs, and <b>2826</b>
+        <a href="https://www.kaggle.com/andrewmvd/data-scientist-jobs">Data Scientist</a> jobs, and created this project.
+        In the following visualizations, you can view and compare job distribution, salaries, and company ratings of these
+        three positions. Hopefully, we can help you find answers to above questions.
+      </p>
+
+      <p id="description">
+
+      </p>
+
+    </div>
+
+<!-- Graph 1: Map -->
+    <h2>Geographic Distribution of Big Data Jobs in the U.S.</h2>
+    <h4><i>Do you have a preffered city to work and live?</i></h4>
+    <div id="description">
+      <p id="description">
+        In this visualization, you can view the geographic distribution of data-related jobs on the U.S. map. You can select
+        a specific job position to view its distribution. Also, by hovering over a state, you can see <b><i>number of jobs</i></b> listing there
+        and the <b><i>top 3 cities</i></b> with the most job opportunities.
+      </p>
+    </div>
+    <!-- Map -->
+    <p class="sort-des">Position(s) Selection</p>
+    <select id="select-position" style="margin-bottom: 30px;">
+        <option value="all" selected>All Positions</option>
+        <option value="ba">Business Analyst</option>
+        <option value="da">Data Analyst</option>
+        <option value="ds">Data Scientist</option>
+    </select>
+    <br>
+    <svg id="choropleth" height="580" width="1000"></svg>
+    <br>
+    <svg id="maplegend" height="60" width="800" style="margin-left: 90"></svg>
+
+
+<!-- Graph 2: Lollipops -->
+    <h2>Average Salary Distribution of Big Data Jobs by State</h2>
+    <h4><i>What are your salary expectations?</i></h4>
+    <div id="description">
+      <p id="description">
+        In this graph, you can explore the average salary distribution over the U.S. states providing the jobs. You will
+        gain a sense of average <b><i>starting salary</i></b> and the <b><i>highest possible salary</i></b> in a specific
+        job position and state. To view more information about a state, you can mouse on its lollipops.
+      </p>
+    </div>
+
+    <div id="pulldown-bar">
+      <div>
+         <!-- Create dropdown menu to select job types -->
+         <p class="sort-des">Position(s) Selection </p>
+         <select id="job-type-select" style="width:260px;">
+           <option value="All" selected>Show All Job Data</option>
+           <option value="business-analyst">Show Business Analyst Jobs</option>
+           <option value="data-analyst">Show Data Analyst Jobs</option>
+           <option value="data-scientist">Show Data Scientist Jobs</option>
+         </select>
+      </div>
+ <!--  Create dropdown menu to select sorting order -->
+      <div>
+        <p class="sort-des">
+          Sort by Salary
+         </p>
+         <select id="sort-select" style="width:260px;">
+           <option value="sortAlpha" selected>Sort Alphabetically</option>
+           <option value="sortLower">Sort by Starting Salary</option>
+           <option value="sortHigher">Sort by Maximum Salary</option>
+           <option value="sortRange">Sort by Salary Range</option>
+         </select>
+      </div>
+    </div>
+
+    <div id="canvas" style="width: 1400px">
+      <svg id="lollipops" height="600" width="900" style="margin-top:20px"></svg>
+      <svg id="description" height="600" width="400" style="margin-top:20px"></svg>
+    </div>
+
+
+<!-- Graph 3: Scatterplot -->
+    <h2>Giant Company Rating vs Job Salary in Big Data Field</h2>
+    <h4><i>Are you looking for a job in a famous, giant company?</i></h4>
+    <div id="description">
+      <p id="description">
+        Considering lots of people prefer to start their career paths in famous, giant companies, we created this visualization
+        focusing on companies with <b>more than 10,000 employees</b>. You can view and compare those <b><i>companies' ratings</i></b> and their
+        <b><i>employees' salaries</i></b>. To view a company's details, you can hover on its corresponding dot.
+      </p>
+      <p id="description">
+        Hopefully, you can find an interested, dream company!
+      </p>
+    </div>
+
+    <!-- Scatterplot -->
+    <div id="twoHalfs">
+      <div id = "filters">
+        <p class="sort-des">
+          Choose a Salary Type
+         </p>
+        <form id = "salaries">
+
+            <input type="radio" id="lower"  name="salarybound" value="Starting Salary" checked>
+                <label for="lower">Starting Salary</label><br>
+            </input>
+
+          <input type="radio" id="higher" name="salarybound" value="Maximum Salary">
+                <label for="higher">Maximum Salary</label><br>
+            </input>
+        </form>
+
+        <p class="sort-des" style="margin-top: 25px">
+          Click to Select a Job Position
+         </p>
+        <svg id = "slegend" width=700 height=60 style="margin-top: 5px"></svg>
+
+      </div>
+
+
+
+      <div id="info-box">
+        <p style=" padding-left: 20px; margin-bottom: 5px;color: #536e80;">Hover on Dots for More Information:</p>
+        <svg id="box" width=500 height=175></svg>
+      </div>
+    </div>
+
+
+    <div id = "scattercanvas" style="width: 1000px">
+        <svg id="scatterplot" width=1000 height=500></svg>
+    </div>
+
+<!-- Import Scripts for Three Plots -->
+<script src="map.js"></script>
+<script src="lollipop.js"></script>
+<script src="scatterplot.js"></script>
+
+
+</body>
+</html>
